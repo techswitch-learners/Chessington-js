@@ -164,7 +164,6 @@ describe('Pawn', () => {
 
             moves.should.not.deep.include(Square.at(3, 3));
         });
-
     });
 
     it('cannot move if there is a piece in front', () => {
