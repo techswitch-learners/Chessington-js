@@ -66,11 +66,12 @@ describe('Pawn', () => {
     it('cannot move if there is a piece in front', () => {
         const pawn = new Pawn(Player.BLACK);
         const blockingPiece = new Rook(Player.WHITE);
+
         board.setPiece(Square.at(6, 3), pawn);
         board.setPiece(Square.at(5, 3), blockingPiece);
 
         const moves = pawn.getAvailableMoves(board);
-        console.log(moves)
+        // console.log(moves)
         moves.should.be.empty;
     });
 
@@ -83,6 +84,17 @@ describe('Pawn', () => {
         const moves = pawn.getAvailableMoves(board);
 
         moves.should.not.deep.include(Square.at(4, 3));
+    });
+
+    it('can move one squares if there is a piece two sqaures in front', () => {
+        const pawn = new Pawn(Player.BLACK);
+        const blockingPiece = new Rook(Player.WHITE);
+        board.setPiece(Square.at(6, 3), pawn);
+        board.setPiece(Square.at(4, 3), blockingPiece);
+
+        const moves = pawn.getAvailableMoves(board);
+
+        moves.should.deep.include(Square.at(5, 3));
     });
 
 });
