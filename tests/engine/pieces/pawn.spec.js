@@ -25,7 +25,7 @@ describe('Pawn', () => {
         it('can move one or two squares up on their first move', () => {
             const pawn = new Pawn(Player.WHITE);
             board.setPiece(Square.at(1, 7), pawn);
-
+            
             const moves = pawn.getAvailableMoves(board);
 
             moves.should.have.length(2);
