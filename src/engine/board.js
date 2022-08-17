@@ -3,8 +3,8 @@ import GameSettings from './gameSettings';
 import Square from './square';
 
 export default class Board {
-    constructor() {
-        this.currentPlayer = Player.WHITE;
+    constructor(currentPlayer) {
+        this.currentPlayer = currentPlayer ? currentPlayer : Player.WHITE;
         this.board = this.createBoard();
     }
 
@@ -23,6 +23,14 @@ export default class Board {
     getPiece(square) {
         return this.board[square.row][square.col];
     }
+
+    isSquareFree(square){
+        if (this.getPiece(square) === undefined){
+            return true
+        }
+        return false
+    }
+
 
     findPiece(pieceToFind) {
         for (let row = 0; row < this.board.length; row++) {

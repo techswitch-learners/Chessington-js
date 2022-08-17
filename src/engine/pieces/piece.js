@@ -1,6 +1,9 @@
+import Player from "../player";
+
 export default class Piece {
     constructor(player) {
         this.player = player;
+        this.opposingPlayer = this.player === Player.WHITE ? Player.BLACK : Player.WHITE;
     }
 
     getAvailableMoves(board) {
