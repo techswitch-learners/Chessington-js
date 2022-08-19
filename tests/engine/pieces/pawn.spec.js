@@ -161,7 +161,7 @@ describe('Pawn', () => {
             board.setPiece(Square.at(3, 3), opposingKing);
 
             const moves = pawn.getAvailableMoves(board);
-
+            // console.log(moves);
             moves.should.not.deep.include(Square.at(3, 3));
         });
     });

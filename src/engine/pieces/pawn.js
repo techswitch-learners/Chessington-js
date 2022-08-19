@@ -1,5 +1,6 @@
 import Player from '../player';
 import Square from '../square';
+import King from './king';
 import Piece from './piece';
 import Rook from './rook';
 
@@ -25,7 +26,7 @@ export default class Pawn extends Piece {
         let blockingPieceArr = [];
         for (let i = 0; i < DiagonallySquare.length; i++){
             if (board.getPiece(DiagonallySquare[i])) { //no piece will get 'undefined'
-                if (board.getPiece(DiagonallySquare[i]).player.toString() == symbol){
+                if (board.getPiece(DiagonallySquare[i]).player.toString() == symbol && !(board.getPiece(DiagonallySquare[i]) instanceof King)){
                     blockingPieceArr.push(1); // 1 For not empty, 0 for empty
                 }
             } else {
@@ -49,9 +50,10 @@ export default class Pawn extends Piece {
         }
         // let SquareToCheck = this.getSquareToCheck (location, this.player)        
         if(this.player === Player.BLACK && location.row != 0) {
-            let blockingPieceArr = this.getBlockingArr(board, squareAheadObj.blackSquareAhead)
 
+            let blockingPieceArr = this.getBlockingArr(board, squareAheadObj.blackSquareAhead)
             let diagonallyToTake = this.checkDiagonallyToTake(board, squareAheadObj.blackDiagonallySquare, squareAheadObj.symbolForBlack)
+
             if(blockingPieceArr[0] === 1){
                 return [];
             } else if(location.row != 6 && blockingPieceArr[0] != 1 && !diagonallyToTake.includes(1)){
@@ -68,8 +70,8 @@ export default class Pawn extends Piece {
         } else if (this.player === Player.BLACK && location.row == 0){
             return []
         } else if (this.player === Player.WHITE && location.row != 7){
-            let blockingPieceArr = this.getBlockingArr(board, squareAheadObj.whiteSquareAhead);
 
+            let blockingPieceArr = this.getBlockingArr(board, squareAheadObj.whiteSquareAhead);
             let diagonallyToTake = this.checkDiagonallyToTake(board, squareAheadObj.whiteDiagonallySquare, squareAheadObj.symbolForWhite)
 
             if(blockingPieceArr[0] === 1){
@@ -85,15 +87,6 @@ export default class Pawn extends Piece {
             } else if (location.row === 1 && blockingPieceArr[1] == 1){
                 return [Square.at(location.row + 1, location.col)]
             }
-                // if(blockingPieceArr[0] === 1){
-                //     return [];
-                // } else if (location.row === 1 && !blockingPieceArr.includes(1)){
-                //     return [Square.at(location.row + 1, location.col), Square.at(location.row + 2, location.col)]
-                // } else if (location.row === 1 && blockingPieceArr[1] == 1){
-                //     return [Square.at(location.row + 1, location.col)]
-                // } else if (location.row != 1 && blockingPieceArr[0] != 1) {
-                //     return [Square.at(location.row + 1, location.col)]
-                // }
         } else if(this.player === Player.WHITE && location.row == 7){
             return []
         }
