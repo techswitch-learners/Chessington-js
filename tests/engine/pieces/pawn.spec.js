@@ -92,7 +92,7 @@ describe('Pawn', () => {
         let board;
         beforeEach(() => board = new Board(Player.BLACK));    
         
-        it('can only move one square down if they have already moved', () => {
+        it.only('can only move one square down if they have already moved', () => {
             const pawn = new Pawn(Player.BLACK);
             board.setPiece(Square.at(6, 0), pawn);
             pawn.moveTo(board, Square.at(5, 0));
